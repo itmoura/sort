@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sort</title>
+</head>
+<body style="text-align: center; margin-top: 200px;">
+    <div style="width: 300px; margin: 0 auto;">
+        <select id="comb">
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <input id="numbers" placeholder="Separar números por ,"/>
+        <button id="gerar">GERAR</button>
+        <br/><br/><br/>
+        <textarea rows="8" cols="40" id="result"></textarea>
+        <button id="copiar">COPIAR</button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="generatorics/generatorics.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#gerar").click(function(){
+                var comb = $("select#comb option:checked").val();
+                var numbers = $("#numbers").val();
+                var newNumbers = numbers.split(',');
+
+                result = [];
+
+                if(comb == 3 )
+                    for (var perm of G.clone.combination(newNumbers, 3)) {
+                        result = result.concat(perm+"\n");
+                    }
+                if(comb == 4)
+                    for (var perm of G.clone.combination(newNumbers, 4)) {
+                        result = result.concat(perm+"\n");
+                    }
+                
+                $("#result").val(result);
+            });
+
+            $("#copiar").click(function(){
+                $('#result').select();
+
+                document.execCommand('copy');
+                if(copiar){
+                    alert('Copiado');
+                }else {
+                    alert('Erro ao copiar, seu navegador pode não ter suporte a essa função.');
+                }
+            });
+
+        });
+
+        // 2,4,6,8,10,12
+        
+    </script>
+    
+</body>
+</html>
