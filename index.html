@@ -8,14 +8,42 @@
 <body style="text-align: center; margin-top: 200px;">
     <div style="width: 300px; margin: 0 auto;">
         <select id="comb">
-            <option value="3">3</option>
-            <option value="4">4</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+            <option value=6>6</option>
+            <option value=7>7</option>
+            <option value=8>8</option>
+            <option value=9>9</option>
+            <option value=10>10</option>
+            <option value=11>11</option>
+            <option value=12>12</option>
+            <option value=13>13</option>
+            <option value=14>14</option>
+            <option value=15>15</option>
+            <option value=16>16</option>
+            <option value=17>17</option>
+            <option value=18>18</option>
+            <option value=19>19</option>
+            <option value=20>20</option>
+            <option value=21>21</option>
+            <option value=22>22</option>
+            <option value=23>23</option>
+            <option value=24>24</option>
+            <option value=25>25</option>
         </select>
         <input id="numbers" placeholder="Separar números por ,"/>
         <button id="gerar">GERAR</button>
         <br/><br/><br/>
         <textarea rows="8" cols="40" id="result"></textarea>
+        <p id="numberResult">Número de combinações: </p>
         <button id="copiar">COPIAR</button>
+        <!-- <br/><br/><br/> -->
+        <!-- <p>Conferir resultado</p>
+        <input id="resultFinal" placeholder="Separar números por ,"/>
+        <button id="match">CONFERIR</button> -->
+        
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -28,18 +56,40 @@
                 var newNumbers = numbers.split(',');
 
                 result = [];
+                comb = parseInt(comb);
+                numberResult = 0;
 
-                if(comb == 3 )
-                    for (var perm of G.clone.combination(newNumbers, 3)) {
-                        result = result.concat(perm+"\n");
-                    }
-                if(comb == 4)
-                    for (var perm of G.clone.combination(newNumbers, 4)) {
-                        result = result.concat(perm+"\n");
-                    }
+                for (var perm of G.clone.combination(newNumbers, comb)) {
+                    numberResult = numberResult + 1;
+                    result = result.concat(perm+"\n");
+                }
                 
                 $("#result").val(result);
+                $("#numberResult").text("Número de combinações: "+ numberResult);
             });
+
+            // $("#match").click(function(){
+            //     var comb = $("select#comb option:checked").val();
+            //     var numbers = $("#numbers").val();
+            //     var result = $("#result").val();
+            //     var newNumbers = numbers.split(',');
+            //     resultF = [];
+            //     resultF = result.split("")
+            //     console.log(resultF[0]);
+
+                
+            //     comb = parseInt(comb);
+            //     numberResult = 0;
+
+            //     for (var perm of G.clone.combination(newNumbers, comb)) {
+            //         if(resultFinal == perm){
+            //             numberResult = numberResult +1;
+            //         }
+            //     }
+                
+            //     $("#result").val(result);
+            //     $("#numberResult").text("Número de combinações corretas: "+ numberResult);
+            // });
 
             $("#copiar").click(function(){
                 $('#result').select();
