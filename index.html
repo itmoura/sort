@@ -34,6 +34,13 @@
             <option value=25>25</option>
         </select>
         <input id="numbers" placeholder="Separar números por ,"/>
+        <br/><br/>
+        <!-- <select id="random">
+            <option value="first">Primeiros</option>
+            <option value="random">Aleatorio</option>
+        </select> -->
+        <input id="qnt" placeholder="Quantidade de jogo"/>
+        <br/><br/>
         <button id="gerar">GERAR</button>
         <br/><br/><br/>
         <textarea rows="8" cols="40" id="result"></textarea>
@@ -52,7 +59,9 @@
         $(document).ready(function(){
             $("#gerar").click(function(){
                 var comb = $("select#comb option:checked").val();
+                var random = $("select#random option:checked").val();
                 var numbers = $("#numbers").val();
+                var qnt = $("#qnt").val();
                 var newNumbers = numbers.split(',');
 
                 result = [];
@@ -62,6 +71,8 @@
                 for (var perm of G.clone.combination(newNumbers, comb)) {
                     numberResult = numberResult + 1;
                     result = result.concat(perm+"\n");
+                    if(numberResult == qnt)
+                        break;
                 }
                 
                 $("#result").val(result);
